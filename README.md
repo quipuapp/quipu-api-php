@@ -50,10 +50,10 @@ $quipu_contact->create_contact($contact);</code></pre>
 The following parameters can be passed to create an invoice.  
 - "issue_date" is required
 - "items" are required. "items" is an array with at least one value, all its variables are required
--- "product" is the item name
--- "cost" is the value in Euros
--- "quantity" must be at least 1
--- "vat_per" is the VAT percentage (not value)
+  - "product" is the item name
+  - "cost" is the value in Euros
+  - "quantity" must be at least 1
+  - "vat_per" is the VAT percentage (not value)
 - The accepted values for "payment_method" are detailed in the [Quipu API documentation](http://quipuapp.github.io/api-v1-docs/?shell#attributes)
 
 <pre><code>
@@ -71,7 +71,7 @@ $order = array(
 
 Pass the connection class to the invoice class:
 
-<pre><code>$quipu_invoice = new Quipu_Api_Invoice($this->api_connection);</code></pre>
+<pre><code>$quipu_invoice = new Quipu_Api_Invoice($api_connection);</code></pre>
 
 You can first set the Numbering Series if one exists:
 
@@ -93,10 +93,10 @@ The following parameters can be passed to create a refund.
 - "refund_date" is required
 - "invoice_id" is required.  This is the Quipu invoice id returned after creating an invoice 
 - "items" are NOT required. If "items" are not passed then the assumption is the whole invoice is being refunded, otherwise the assumption is it is a partial refund:
--- "product" is the item name
--- "cost" is the value in Euros
--- "quantity" must be at least 1
--- "vat_per" is the VAT percentage (not value)
+  - "product" is the item name
+  - "cost" is the value in Euros
+  - "quantity" must be at least 1
+  - "vat_per" is the VAT percentage (not value)
 
 <pre><code>
 $order = array(
@@ -113,7 +113,7 @@ $order = array(
 
 Pass the connection class to the invoice class:
 
-<pre><code>$quipu_invoice = new Quipu_Api_Invoice($this->api_connection);</code></pre>
+<pre><code>$quipu_invoice = new Quipu_Api_Invoice($api_connection);</code></pre>
 
 You can first set the Refund Numbering Series if one exists:
 
