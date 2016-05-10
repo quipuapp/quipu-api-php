@@ -51,7 +51,7 @@ class Quipu_Api_Contact extends Quipu_Api {
 			if($contact['tax_id']) {
 				$this->get_contact($contact['tax_id']);
 
-				if(empty($this->get_id())) {
+				if(empty($this->id)) {
 					$this->__create_contact($contact);					
 				}
 			} else {

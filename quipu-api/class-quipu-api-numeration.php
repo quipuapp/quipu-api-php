@@ -27,7 +27,7 @@ class Quipu_Api_Numeration extends Quipu_Api {
 			// Try to fetch existing prefix
 			$this->get_series($prefix, $amending);
 
-			if(empty($this->get_id())) {
+			if(empty($this->id)) {
 				$postData = array(
 				    "data" => array(
 				    	"type" => "numbering_series",

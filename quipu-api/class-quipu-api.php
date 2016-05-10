@@ -38,7 +38,7 @@ abstract class Quipu_Api {
 	/**
 	 * @var Integrater
 	 */
-	private $id = '';
+	protected $id = '';
 
 	/**
 	 * Quipu_Api constructor.
