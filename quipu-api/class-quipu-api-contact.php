@@ -18,7 +18,10 @@ class Quipu_Api_Contact extends Quipu_Api {
 	}
 
 	private function __create_contact($contact) {
-		if(empty($contact['name'])){
+		
+		// Check if contact name is empty spaces
+		$trim_contact = trim($contact['name']);
+		if( empty( $trim_contact ) ){
 			throw new Exception('Create: no contact name passed.');
 		}
 

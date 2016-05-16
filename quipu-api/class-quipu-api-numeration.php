@@ -56,7 +56,7 @@ class Quipu_Api_Numeration extends Quipu_Api {
 		}		
 	}
 
-	public function get_series($prefix, $amending) {
+	public function get_series($prefix, $amending = false) {
 		if(empty($prefix)) {
 			throw new Exception('Get: passed prefix variable is empty.');
 		}

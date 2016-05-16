@@ -59,8 +59,10 @@ class Quipu_Api_Connection {
 	*/
 	public static function get_instance($api_key, $api_secret) {
 
-		// If no instance then make one OR the API key and secret are not the same i.e. new account/connection
-		if( (!self::$_instance) || (!$this->is_key_match($api_key, $api_secret)) ) { 
+		// If no instance then make one, else if the API key and secret are not the same i.e. new account/connection
+		if( (!self::$_instance) ) { 
+			self::$_instance = new self($api_key, $api_secret);
+		} elseif( !(self::$_instance->is_key_match($api_key, $api_secret)) ) { 
 			self::$_instance = new self($api_key, $api_secret);
 		}
 
