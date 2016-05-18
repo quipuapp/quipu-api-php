@@ -25,6 +25,8 @@ class Quipu_Api_Contact extends Quipu_Api {
 			throw new Exception('Create: no contact name passed.');
 		}
 
+		$contact['country_code'] = strtolower($contact['country_code']);
+		
 		try {
 			$postData = array(
 			    "data" => array(
