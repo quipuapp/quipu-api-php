@@ -1,0 +1,7 @@
+{
+    "name": "quipu/quipu-api",
+    "description": "Official PHP client for the Quipu API",
+    "require": {
+        "php": "^5.3 || ^7.0"
+    }
+}
