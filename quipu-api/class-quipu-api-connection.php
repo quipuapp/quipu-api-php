@@ -320,7 +320,7 @@ class Quipu_Api_Connection
         if ($this->init_request(self::API_URL.$endpoint) === false) {
             throw new Exception($this->error_msg);
         }
-        curl_setopt($this->curl, CURLOPT_PUT, true);
+        curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, json_encode($post_data));
         $res = $this->finish_request();
         if (!$res) {
