@@ -66,17 +66,18 @@ class Quipu_Api_Invoice extends Quipu_Api {
 		    	"attributes" => array(
 		    		"kind" => "income",
 		    		"issue_date" => "$order[issue_date]",
-		    		"paid_at" => "$order[issue_date]",
-		            "payment_method" => "$order[payment_method]"
-				),
-				"relationships" => array(
-					"contact" => array(
-						"data" => array(
-							"id" => "$contact_id",
-							"type" => "contacts"						
-						)
+		    		"paid_at" => "$order[paid_at]",
+		    		"due_date" => "$order[due_date]",
+		            	"payment_method" => "$order[payment_method]"
+			),
+			"relationships" => array(
+				"contact" => array(
+					"data" => array(
+						"id" => "$contact_id",
+						"type" => "contacts"						
 					)
 				)
+			)
 		    )
 		);
 
