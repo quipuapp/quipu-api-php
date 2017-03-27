@@ -329,7 +329,47 @@ class Quipu_Api_Connection
 
         return $res;
     }
+    /**
+     * Do the request to get the invoice pdf
+     *
+     * @throws Exception
+     * @param  string   API endpoint and post data
+     *
+     * @return bool/string
+     */
+    public function get_pdf($endpoint)
+    {
 
+        // Check if required settings are set
+        if (false === $this->do_keys_exist()) {
+            return false;
+        }
+
+        // Get access token to make API call
+        $access_token = $this->get_access_token();
+        if ($access_token === false) {
+            return false;
+        }
+
+        $this->curl = curl_init($endpoint);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $this->curl,
+            CURLOPT_HTTPHEADER,
+            [
+                'Authorization: Bearer '.$access_token,
+                'Accept: application/pdf',
+                'Content-Type: application/pdf',
+            ]
+        );
+
+        $response = curl_exec($this->curl);
+        dump(curl_getinfo($this->curl));
+        curl_close($this->curl);
+
+        return $response;
+    }
+    
     /**
      * Magic method clone is empty to prevent duplication of connection
      */
