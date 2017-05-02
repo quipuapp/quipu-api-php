@@ -1,155 +1,173 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} // Exit if accessed directly
-
-if ( ! class_exists( 'Quipu_Api_Connection' ) ) {
-	include_once( 'class-quipu-api-connection.php' );
+if (!defined('ABSPATH')) {
+    exit;
 }
+include_once('class-quipu-api-connection.php');
 
-abstract class Quipu_Api {
+abstract class Quipu_Api
+{
 
-	/**
-	 * The request endpoint
-	 *
-	 * @var String
-	 */
-	private $endpoint = '';
+    /**
+     * The request response
+     *
+     * @var array
+     */
+    protected $response = null;
+    /**
+     * @var Integrater
+     */
+    protected $id = '';
+    /**
+     * The request endpoint
+     *
+     * @var String
+     */
+    private $endpoint = '';
+    /**
+     * The query string
+     *
+     * @var string
+     */
+    private $query = [];
+    /**
+     * @var Quipu_Api_Connection
+     */
+    private $api_connection;
 
-	/**
-	 * The query string
-	 *
-	 * @var string
-	 */
-	private $query = array();
+    /**
+     * Quipu_Api constructor.
+     *
+     * @param string $api_key , $api_secret
+     */
+    public function __construct(Quipu_Api_Connection $api_connection)
+    {
+        $this->api_connection = $api_connection;
+    }
 
-	/**
-	 * The request response
-	 * @var array
-	 */
-	protected $response = null;
+    /**
+     * Get the id
+     *
+     * @return $id
+     */
+    public function get_id()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @var Quipu_Api_Connection
-	 */
-	private $api_connection;
+    /**
+     * Method to set id
+     *
+     * @param $id
+     */
+    public function set_id($id)
+    {
+        $this->id = $id;
+    }
 
-	/**
-	 * @var Integrater
-	 */
-	protected $id = '';
+    /**
+     * Get response
+     *
+     * @return array
+     */
+    public function get_response()
+    {
+        return $this->response;
+    }
 
-	/**
-	 * Quipu_Api constructor.
-	 *
-	 * @param string $api_key, $api_secret
-	 */
-	public function __construct( Quipu_Api_Connection $api_connection) {
-		$this->api_connection = $api_connection;
-	}
+    public function create_request($post_data)
+    {
+        try {
+            $this->response = $this->api_connection->post_request($this->endpoint, $post_data);
 
-	/**
-	 * Method to set id
-	 *
-	 * @param $id
-	 */
-	public function set_id( $id ) {
-		$this->id = $id;
-	}
+            if (isset($this->response['data']['id'])) {
+                $this->set_id($this->response['data']['id']);
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
-	/**
-	 * Get the id
-	 *
-	 * @return $id
-	 */
-	public function get_id() {
-		return $this->id;
-	}
+    public function update_request($post_data)
+    {
+        try {
+            $this->response = $this->api_connection->put_request($this->endpoint, $post_data);
 
-	/**
-	 * Method to set endpoint
-	 *
-	 * @param $endpoint
-	 */
-	protected function set_endpoint( $endpoint ) {
-		$this->endpoint = $endpoint;
-	}
+            if (isset($this->response['data']['id'])) {
+                $this->set_id($this->response['data']['id']);
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
-	/**
-	 * Get the endpoint
-	 *
-	 * @return String
-	 */
-	protected function get_endpoint() {
-		return $this->endpoint;
-	}
+    public function get_request()
+    {
+        try {
+            $this->response = $this->api_connection->get_request($this->endpoint);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
-	/**
-	 * @return string
-	 */
-	protected function get_query() {
-		return $this->query;
-	}
+    public function get_filter_request($query_string)
+    {
+        try {
+            $this->response = $this->api_connection->get_request($this->endpoint.$query_string);
 
+            if (isset($this->response['data'][0]['id'])) {
+                $this->set_id($this->response['data'][0]['id']);
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
-	/**
-	 * @param string $query
-	 */
-	protected function set_query( $query ) {
-		$this->query = $query;
-	}
+    /**
+     * Get the endpoint
+     *
+     * @return String
+     */
+    protected function get_endpoint()
+    {
+        return $this->endpoint;
+    }
 
-	/**
-	 * Get response
-	 *
-	 * @return array
-	 */
-	public function get_response() {
-		return $this->response;
-	}
+    /**
+     * Method to set endpoint
+     *
+     * @param $endpoint
+     */
+    protected function set_endpoint($endpoint)
+    {
+        $this->endpoint = $endpoint;
+    }
 
-	/**
-	 * Clear the response
-	 *
-	 * @return bool
-	 */
-	private function clear_response() {
-		$this->response = null;
+    /**
+     * @return string
+     */
+    protected function get_query()
+    {
+        return $this->query;
+    }
 
-		return true;
-	}
+    /**
+     * @param string $query
+     */
+    protected function set_query($query)
+    {
+        $this->query = $query;
+    }
 
-	public function create_request($post_data) {
-		try {
-			$this->response = $this->api_connection->post_request($this->endpoint, $post_data);
+    /**
+     * Clear the response
+     *
+     * @return bool
+     */
+    private function clear_response()
+    {
+        $this->response = null;
 
-			if(isset($this->response['data']['id'])) {
-				$this->set_id($this->response['data']['id']);
-			}
-		} catch (Exception $e) {
-			throw $e;
-		} 
-	}
-
-	public function get_request() {
-		try {
-			$this->response = $this->api_connection->get_request($this->endpoint);
-		} catch (Exception $e) {
-			throw $e;
-		} 		
-	}
-
-	public function get_filter_request($query_string) {
-		try {
-			$this->response = $this->api_connection->get_request($this->endpoint.$query_string);
-
-			if(isset($this->response['data'][0]['id'])) {
-				$this->set_id($this->response['data'][0]['id']);
-			}
-		} catch (Exception $e) {
-			throw $e;
-		}		
-	}
-
+        return true;
+    }
 }

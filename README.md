@@ -30,15 +30,16 @@ The following parameters can be passed to create a contact.
 
 <pre><code>
 $contact = array(
-	    		"name" => "CONTACT_NAME",
-	            "tax_id" => "CONTACT_VAT_ID",
-	            "phone" => "CONTACT_PHONE ",
-	            "email" => "CONTACT_EMAIL",
-	            "address" => "CONTACT_ADDRESS",
-	            "town" => "CONTACT_CITY",
-	            "zip_code" => "CONTACT_ZIP_CODE",
-	            "country_code" => "CONTACT_CODE"
-			);
+	"name" => "CONTACT_NAME",
+	"tax_id" => "CONTACT_VAT_ID",
+	"phone" => "CONTACT_PHONE ",
+	"email" => "CONTACT_EMAIL",
+	"address" => "CONTACT_ADDRESS",
+	"town" => "CONTACT_CITY",
+	"zip_code" => "CONTACT_ZIP_CODE",
+	"country_code" => "CONTACT_CODE",
+	"bank_account_number" => "IBAN"
+);
 </code></pre>
 
 Pass the connection class to the contact class, then call "create_contact", with the array above.  The contact will either be created or loaded if they already exist.
@@ -58,15 +59,15 @@ The following parameters can be passed to create an invoice.
 
 <pre><code>
 $order = array(
-	    		"payment_method" => "PAYMENT_METHOD",
-	            "issue_date" => "YYYY-mm-dd",
-	            "items" => array(
-				            	"product" => "PRODUCT_NAME",
-				            	"cost" => "PRODUCT_PRICE",
-				            	"quantity" => "PRODUCT_QUANTITY",
-				            	"vat_per" => "VAT_PERCENTAGE"
-				            );
-	            );
+	"payment_method" => "PAYMENT_METHOD",
+	"issue_date" => "YYYY-mm-dd",
+	"items" => array(
+		"product" => "PRODUCT_NAME",
+		"cost" => "PRODUCT_PRICE",
+		"quantity" => "PRODUCT_QUANTITY",
+		"vat_per" => "VAT_PERCENTAGE"
+	);
+);
 </code></pre>
 
 Pass the connection class to the invoice class:
@@ -100,15 +101,15 @@ The following parameters can be passed to create a refund.
 
 <pre><code>
 $order = array(
-	    		"invoice_id" => "QUIPU_INVOICE_ID",
-	            "refund_date" => "YYYY-mm-dd",
-	            "items" => array(
-				            	"product" => "PRODUCT_NAME",
-				            	"cost" => "PRODUCT_PRICE",
-				            	"quantity" => "PRODUCT_QUANTITY",
-				            	"vat_per" => "VAT_PERCENTAGE"
-				            );
-	            );
+	"invoice_id" => "QUIPU_INVOICE_ID",
+	"refund_date" => "YYYY-mm-dd",
+	"items" => array(
+		"product" => "PRODUCT_NAME",
+		"cost" => "PRODUCT_PRICE",
+		"quantity" => "PRODUCT_QUANTITY",
+		"vat_per" => "VAT_PERCENTAGE"
+	);
+);
 </code></pre>
 
 Pass the connection class to the invoice class:
