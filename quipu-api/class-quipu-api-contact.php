@@ -75,7 +75,7 @@ class Quipu_Api_Contact extends Quipu_Api
                 ],
             ];
 
-            $this->update_request($postData);
+            $this->create_request($postData);
         } catch (Exception $e) {
             throw $e;
         }
