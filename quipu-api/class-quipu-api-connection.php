@@ -364,7 +364,6 @@ class Quipu_Api_Connection
         );
 
         $response = curl_exec($this->curl);
-        dump(curl_getinfo($this->curl));
         curl_close($this->curl);
 
         return $response;
