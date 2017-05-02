@@ -67,7 +67,7 @@ class Quipu_Api_Contact extends Quipu_Api
                         "zip_code" => "$contact[zip_code]",
                         "country_code" => "$contact[country_code]",
                         "supplier_number" => null,
-                        "is_supplier_of_direct_goods" => (boolean)$contact[is_supplier_of_direct_goods],
+                        "is_supplier_of_direct_goods" => (boolean)$contact['is_supplier_of_direct_goods'],
                         "bank_account_number" => "$contact[bank_account_number]",
                         "bank_account_swift_bic" => "$contact[bank_account_swift_bic]",
                         "sepa_signature_date" => "$contact[sepa_signature_date]",
@@ -137,7 +137,7 @@ class Quipu_Api_Contact extends Quipu_Api
                 $attributes["supplier_number"] = "$contact[supplier_number]";
             }
             if ($contact['is_supplier_of_direct_goods']) {
-                $attributes["is_supplier_of_direct_goods"] = "$contact[is_supplier_of_direct_goods]";
+                $attributes["is_supplier_of_direct_goods"] = (boolean)$contact['is_supplier_of_direct_goods'];
             }
             if ($contact['bank_account_number']) {
                 $attributes["bank_account_number"] = "$contact[bank_account_number]";
