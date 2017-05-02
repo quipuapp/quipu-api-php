@@ -71,10 +71,10 @@ class Quipu_Api_Invoice extends Quipu_Api
                 "type" => "invoices",
                 "attributes" => [
                     "kind" => "income",
-                    "issue_date" => "$order[issue_date]",
-                    "paid_at" => "$order[paid_at]",
-                    "due_date" => "$order[due_date]",
-                    "payment_method" => "$order[payment_method]",
+                    "issue_date" => $order['issue_date'],
+                    "paid_at" => $order['paid_at'],
+                    "due_date" => $order['due_date'],
+                    "payment_method" => $order['payment_method'],
                 ],
                 "relationships" => [
                     "contact" => [
@@ -96,10 +96,10 @@ class Quipu_Api_Invoice extends Quipu_Api
             $item = [
                 "type" => "book_entry_items",
                 "attributes" => [
-                    "concept" => "$value[product]",
-                    "unitary_amount" => "$value[cost]",
-                    "quantity" => "$value[quantity]",
-                    "vat_percent" => "$value[vat_per]",
+                    "concept" => $value['product'],
+                    "unitary_amount" => $value['cost'],
+                    "quantity" => $value['quantity'],
+                    "vat_percent" => $value['vat_per'],
                     "retention_percent" => "0",
                 ],
             ];
@@ -131,12 +131,12 @@ class Quipu_Api_Invoice extends Quipu_Api
             "data" => [
                 "type" => "invoices",
                 "attributes" => [
-                    "paid_at" => "$refund[refund_date]",
+                    "paid_at" => $refund['refund_date'],
                 ],
                 "relationships" => [
                     "amended_invoice" => [
                         "data" => [
-                            "id" => "$refund[invoice_id]",
+                            "id" => $refund['invoice_id'],
                             "type" => "invoices",
                         ],
                     ],
