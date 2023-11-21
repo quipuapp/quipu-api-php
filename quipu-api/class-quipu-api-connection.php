@@ -189,8 +189,7 @@ class Quipu_Api_Connection {
 		$curl = curl_init( self::API_URL.self::AUTH_URL );
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_POST, true);
-		$credentials = base64_encode($this->api_key . ":" . $this->api_secret);
-		curl_setopt($curl, CURLOPT_USERPWD, $credentials);
+		curl_setopt($curl, CURLOPT_USERPWD, $this->api_key . ":" . $this->api_secret);
 		curl_setopt($curl, CURLOPT_HEADER,'Content-Type: application/x-www-form-urlencoded;charset=UTF-8');
 		curl_setopt($curl, CURLOPT_POSTFIELDS, array(
 		    'grant_type' => 'client_credentials',
